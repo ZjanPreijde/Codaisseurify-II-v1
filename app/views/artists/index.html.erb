@@ -1,0 +1,28 @@
+      <!-- Render body_header -->
+      <%= render "shared/body_header" %>
+
+      <div class="panel-heading text-center">
+        <p><h1>Our Artists</h1></p>
+      </div>
+
+      <div class="panel-body">
+      <% @artists.each do |artist| %>
+        <div class="col-md-6">
+          <p>
+            <%= link_to "(#" + artist.id.to_s  + ") " + artist.name,
+              artist_path(artist.id),
+              class: "btn btn-default cfy-button-artist" %>
+          </p>
+
+          <!-- something with inline in stead of block? -->
+          <ul>
+          <% artist.songs.each do |song| %>
+            <li><%=song.title%></li>
+          <% end %>
+          </ul>
+        </div>
+        <% end %>
+      </div>
+
+      <!-- Render body_footer -->
+      <%= render "shared/body_footer" %>

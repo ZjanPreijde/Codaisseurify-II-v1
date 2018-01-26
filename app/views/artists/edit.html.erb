@@ -1,0 +1,39 @@
+      <!-- Render body_header -->
+      <%= render "shared/body_header" %>
+
+      <div class="panel-heading">
+        <div class="cfy-name-artist text-center">
+          <h1><%= @artist.name %></h1>
+        </div>
+      </div>
+
+      <div class="panel-body">
+        <div class="col-md-12 text-center">
+          <%= form_for @artist, html: { multipart: true } do |f| %>
+          <% if @artist.errors.count > 0 %>
+            <% @artist.errors.full_messages.each do |msg| %>
+              <p class="alert alert-danger" role="alert"><%= msg %></p>
+            <% end %>
+          <% end %>
+
+
+          <div class="form-group">
+            <label>Photo :</label>
+            <%= file_field_tag "image", type: :file %>
+          </div>
+
+          <!-- <div class="form-group">
+            <label>Biography :</label> -->
+            <!-- < %= f.text_area :bio, rows: 5, placeholder: "Say something about this artist", class: "form-control" %> -->
+          <!-- </div> -->
+
+          <div class="actions">
+            <%= f.submit "Save", class: "btn btn-success" %>
+            <%= link_to "Cancel", @artist, class: "btn btn-default" %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Render body_footer -->
+      <%= render "shared/body_footer" %>

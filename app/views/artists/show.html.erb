@@ -1,0 +1,75 @@
+      <!-- Render body_header -->
+      <%= render "shared/body_header" %>
+
+      <div class="panel-heading">
+        <div class="text-center">
+          <h1>(#<%= @artist.id %>) <%= @artist.name %></h1>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div>
+          <%= link_to "Update",
+            edit_artist_path(@artist.id),
+            class: "btn btn-info btn-md" %>
+          <%= link_to "Delete",
+            artist_path(@artist.id),
+            method: :delete,
+            data: { confirm: "Delete artist. Are you sure?" },
+            class: "btn btn-warning btn-md" %>
+          <%= link_to "Back",
+            artists_path,
+            class: "btn btn-info btn-md" %>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="panel-body">
+        <table class="table">
+          <tr>
+            <th>Title</th>
+            <th>#</th>
+            <th>Don't like it?</th>
+          </tr>
+          <% @artist.songs.each do |song| %>
+            <tr>
+              <td>
+                <%= song.title %>
+              </td>
+              <td>
+                #<%= song.artist_id %>-<%= song.id %>
+              </td>
+              <td>
+                <%= link_to "Delete",
+                  artist_song_path(song.artist.id, song.id),
+                  method: :delete,
+                  data: { confirm: "Delete song. Are you sure?" },
+                  class: "btn btn-warning" %>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+
+      <hr>
+
+      <div class="panel-body">
+        <%= form_for [@artist, @artist.songs.new], html: { multipart: true } do |f| %>
+
+        <div class="form-group">
+          <h4>Would you like to add your favorite song?</h4>
+          <label>Title :</label>
+          <%= f.text_field :title,
+              class: "form-control",
+              placeholder: "Title" %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Add",
+              class: "btn btn-success btn-md" %>
+        </div>
+        <% end %>
+      </div>
+
+      <!-- Render body_footer -->
+      <%= render "shared/body_footer" %>
