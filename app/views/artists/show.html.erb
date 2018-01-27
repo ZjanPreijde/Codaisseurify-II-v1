@@ -2,33 +2,26 @@
           <!-- Render body_header -->
           <%= render "shared/body_header" %>
 
+          <!-- artists/show.html.erb -->
           <div class="panel-heading">
             <div class="text-center">
               <h1>(#<%= @artist.id %>) <%= @artist.name %></h1>
             </div>
           </div>
           <div class="panel-body">
-            <table class="table">
-              <tr>
-                <td style="text-align:center">
-                  <%= link_to "Back",
-                    artists_path,
-                    class: "btn btn-info btn-md" %>
-                </td>
-                <td style="text-align:center">
-                <%= link_to "Update",
-                  edit_artist_path(@artist.id),
-                  class: "btn btn-info btn-md" %>
-                </td>
-                <td style="text-align:center">
-                  <%= link_to "Delete",
-                    artist_path(@artist.id),
-                    method: :delete,
-                    data: { confirm: "Delete artist. Are you sure?" },
-                    class: "btn btn-warning btn-md" %>
-                </td>
-              </tr>
-            </table>
+            <div class="float-left">
+              <%= link_to "Back to Artists",
+                artists_path,
+                class: "btn btn-info btn-md" %>
+            </div>
+            <div class="float-right">
+              <a href="#"
+                id="song-delete-all"
+                 class="btn btn-warning">
+                 Delete all songs
+              </a>
+          </div>
+
           </div>
 
           <div class="panel-body">
@@ -40,18 +33,17 @@
               </tr>
               <% @artist.songs.each do |song| %>
                 <tr>
-                  <td>
-                    <%= song.title %>
-                  </td>
-                  <td>
-                    #<%= song.artist_id %>-<%= song.id %>
-                  </td>
+                  <td id="song-<%= song.id %>" class="song"><%= song.title %></td>
+                  <td>#<%= song.artist_id %>-<%= song.id %></td>
                   <td class="text-center">
-                    <%= link_to "Delete",
+                    <a href="#"
+                      id="song-delete-<%= song.id %>"
+                      class="song-delete btn btn-warning">Delete</a>
+                    <!-- < %= link_to "Delete",
                       artist_song_path(song.artist.id, song.id),
                       method: :delete,
                       data: { confirm: "Delete song. Are you sure?" },
-                      class: "btn btn-warning" %>
+                      class: "btn btn-warning" %> -->
                   </td>
                 </tr>
               <% end %>
@@ -66,15 +58,20 @@
                 <td>
                   <div class="form-group">
                     <%= f.text_field :title,
+                        id: "new-title",
                         class: "form-control",
                         placeholder: "Title" %>
                   </div>
                 </td>
                 <td class="text-center">
                   <div class="actions">
-                    <%= f.submit "Add",
-                        class: "btn btn-success btn-md" %>
-                  </div>
+                    <a href="#" id="add-song" class="btn btn-success btn-md">Add</a>
+                    <!-- < %= f.submit "Add",
+                        class: "btn btn-success btn-md" %> -->
+                    <!-- <div class="actions">
+                       <input type="submit" name="commit" value="Add" class="btn btn-success btn-md" data-disable-with="Add" />
+                     </div> -->
+                </div>
                 </td>
               </tr>
             </table>
