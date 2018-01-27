@@ -8,9 +8,19 @@
             </div>
           </div>
           <div class="panel-body">
-            <%= link_to "Back to Artists",
-              artists_path,
-              class: "btn btn-info btn-md" %>
+            <div class="float-left">
+              <%= link_to "Back to Artists",
+                artists_path,
+                class: "btn btn-info btn-md" %>
+            </div>
+            <div class="float-right">
+              <a href="#"
+                id="song-delete-all"
+                 class="btn btn-warning">
+                 Delete all songs
+              </a>
+          </div>
+
           </div>
 
           <div class="panel-body">

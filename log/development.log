@@ -6222,3 +6222,100 @@ Processing by ArtistsController#show as HTML
 Completed 200 OK in 41ms (Views: 37.6ms | ActiveRecord: 0.8ms)
 
 
+Started GET "/artists" for 127.0.0.1 at 2018-01-27 11:22:14 +0100
+Processing by ArtistsController#index as HTML
+  Rendering artists/index.html.erb within layouts/application
+  Rendered shared/_body_header.html.erb (0.9ms)
+  [1m[36mArtist Load (0.4ms)[0m  [1m[34mSELECT "artists".* FROM "artists"[0m
+  [1m[36mSong Load (0.5ms)[0m  [1m[34mSELECT "songs".* FROM "songs" WHERE "songs"."artist_id" = $1[0m  [["artist_id", 4]]
+  [1m[36mSong Load (0.2ms)[0m  [1m[34mSELECT "songs".* FROM "songs" WHERE "songs"."artist_id" = $1[0m  [["artist_id", 5]]
+  [1m[36mSong Load (0.2ms)[0m  [1m[34mSELECT "songs".* FROM "songs" WHERE "songs"."artist_id" = $1[0m  [["artist_id", 6]]
+  Rendered shared/_body_footer.html.erb (0.3ms)
+  Rendered artists/index.html.erb within layouts/application (11.3ms)
+Completed 200 OK in 54ms (Views: 51.1ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/artists/6" for 127.0.0.1 at 2018-01-27 11:22:16 +0100
+Processing by ArtistsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mArtist Load (0.3ms)[0m  [1m[34mSELECT  "artists".* FROM "artists" WHERE "artists"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering artists/show.html.erb within layouts/application
+  Rendered shared/_body_header.html.erb (0.6ms)
+  [1m[36mSong Load (0.5ms)[0m  [1m[34mSELECT "songs".* FROM "songs" WHERE "songs"."artist_id" = $1[0m  [["artist_id", 6]]
+  Rendered shared/_body_footer.html.erb (0.2ms)
+  Rendered artists/show.html.erb within layouts/application (6.4ms)
+Completed 200 OK in 45ms (Views: 42.4ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/artists/6" for 127.0.0.1 at 2018-01-27 11:23:57 +0100
+Processing by ArtistsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mArtist Load (0.5ms)[0m  [1m[34mSELECT  "artists".* FROM "artists" WHERE "artists"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering artists/show.html.erb within layouts/application
+  Rendered shared/_body_header.html.erb (0.4ms)
+  [1m[36mSong Load (0.2ms)[0m  [1m[34mSELECT "songs".* FROM "songs" WHERE "songs"."artist_id" = $1[0m  [["artist_id", 6]]
+  Rendered shared/_body_footer.html.erb (0.2ms)
+  Rendered artists/show.html.erb within layouts/application (6.1ms)
+Completed 200 OK in 42ms (Views: 38.9ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/artists/6" for 127.0.0.1 at 2018-01-27 11:24:08 +0100
+Processing by ArtistsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mArtist Load (0.6ms)[0m  [1m[34mSELECT  "artists".* FROM "artists" WHERE "artists"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering artists/show.html.erb within layouts/application
+  Rendered shared/_body_header.html.erb (0.6ms)
+  [1m[36mSong Load (0.4ms)[0m  [1m[34mSELECT "songs".* FROM "songs" WHERE "songs"."artist_id" = $1[0m  [["artist_id", 6]]
+  Rendered shared/_body_footer.html.erb (0.3ms)
+  Rendered artists/show.html.erb within layouts/application (8.7ms)
+Completed 200 OK in 45ms (Views: 41.5ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/artists/6" for 127.0.0.1 at 2018-01-27 11:26:13 +0100
+Processing by ArtistsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mArtist Load (0.5ms)[0m  [1m[34mSELECT  "artists".* FROM "artists" WHERE "artists"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering artists/show.html.erb within layouts/application
+  Rendered shared/_body_header.html.erb (0.5ms)
+  [1m[36mSong Load (0.3ms)[0m  [1m[34mSELECT "songs".* FROM "songs" WHERE "songs"."artist_id" = $1[0m  [["artist_id", 6]]
+  Rendered shared/_body_footer.html.erb (0.2ms)
+  Rendered artists/show.html.erb within layouts/application (6.1ms)
+Completed 200 OK in 42ms (Views: 38.3ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/artists/6" for 127.0.0.1 at 2018-01-27 11:26:15 +0100
+Processing by ArtistsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mArtist Load (0.4ms)[0m  [1m[34mSELECT  "artists".* FROM "artists" WHERE "artists"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering artists/show.html.erb within layouts/application
+  Rendered shared/_body_header.html.erb (0.7ms)
+  [1m[36mSong Load (0.5ms)[0m  [1m[34mSELECT "songs".* FROM "songs" WHERE "songs"."artist_id" = $1[0m  [["artist_id", 6]]
+  Rendered shared/_body_footer.html.erb (0.2ms)
+  Rendered artists/show.html.erb within layouts/application (8.0ms)
+Completed 200 OK in 44ms (Views: 40.7ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/artists/6" for 127.0.0.1 at 2018-01-27 11:27:22 +0100
+Processing by ArtistsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mArtist Load (0.3ms)[0m  [1m[34mSELECT  "artists".* FROM "artists" WHERE "artists"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering artists/show.html.erb within layouts/application
+  Rendered shared/_body_header.html.erb (0.4ms)
+  [1m[36mSong Load (0.2ms)[0m  [1m[34mSELECT "songs".* FROM "songs" WHERE "songs"."artist_id" = $1[0m  [["artist_id", 6]]
+  Rendered shared/_body_footer.html.erb (0.2ms)
+  Rendered artists/show.html.erb within layouts/application (5.7ms)
+Completed 200 OK in 41ms (Views: 38.4ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/artists/6" for 127.0.0.1 at 2018-01-27 11:27:45 +0100
+Processing by ArtistsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mArtist Load (0.3ms)[0m  [1m[34mSELECT  "artists".* FROM "artists" WHERE "artists"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering artists/show.html.erb within layouts/application
+  Rendered shared/_body_header.html.erb (0.8ms)
+  [1m[36mSong Load (0.4ms)[0m  [1m[34mSELECT "songs".* FROM "songs" WHERE "songs"."artist_id" = $1[0m  [["artist_id", 6]]
+  Rendered shared/_body_footer.html.erb (0.5ms)
+  Rendered artists/show.html.erb within layouts/application (9.3ms)
+Completed 200 OK in 51ms (Views: 47.9ms | ActiveRecord: 0.7ms)
+
+
