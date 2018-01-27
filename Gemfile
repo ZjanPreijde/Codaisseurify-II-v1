@@ -56,17 +56,25 @@ gem 'bootstrap-sass', '~> 3.3.6'
 # Use jQuery for easier javascript
 gem 'jquery-rails', '~> 4.3.1'
 
-# For testing
+# For Rspec testing
 group :development, :test do
   gem 'rspec-rails', '~> 3.5', '>= 3.5.2'
+  gem 'factory_bot_rails'
+  gem 'faker'
 end
-
 group :test do
   gem 'capybara', '~> 2.9', '>= 2.9.1'
   gem 'shoulda-matchers', '~> 3.1'
 end
 
+# Integration testing
 group :development, :test do
-  gem 'factory_bot_rails'
-  gem 'faker'
+  gem 'selenium-webdriver'
+  gem "chromedriver-helper"
 end
+group :test do
+  gem 'database_cleaner'
+end
+
+# Add Active Model Serializers gem for API calls
+gem 'active_model_serializers', '~> 0.10.0'

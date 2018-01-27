@@ -111,7 +111,7 @@ If song would have dependants, and no *dependent: :destroy* or not able to destr
 
 
 
-UPDATE
+UPDATE (not used for Codaisseurify-II)
 
 - -i
 - -H "Accept: application/json"
@@ -127,8 +127,132 @@ May respond with
 
 
 
-
 ####Taken from the reader, we'll only do add and delete (all) :
+
+
+
+Integration testing, setup
+
+```ruby
+# Gemfile
+
+# ...
+
+group :development, :test do
+  # ...
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'selenium-webdriver'
+  gem "chromedriver-helper"
+end
+
+group :test do
+  gem 'database_cleaner'
+end
+
+```
+
+
+
+```shell
+$ bundle install
+$ rake db:create && rake db:migrate && rake db:seed
+$ rails g rspec:install
+$ rails s
+
+```
+
+
+
+Add the following two imports in `spec/rails_helper.rb` after the line that says: `# Add additional requires below this line. Rails is not loaded until this point!`
+
+```ruby
+# spec/rails_helper.rb
+
+require 'capybara/rspec'
+require 'capybara/rails'
+```
+
+You need to uncomment the following line as well:
+
+```ruby
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+```
+
+And assign `config.use_transactional_fixtures` to false, instead than true:
+
+```ruby
+config.use_transactional_fixtures = false
+```
+
+And ad the end of the `rails_helper.rb` file (below the end of the `RSpec.configure` block), add these lines:
+
+```ruby
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(app, browser: :chrome)
+end
+```
+
+
+
+## Setting up DatabaseCleaner
+
+Then add a configuration file for DatabaseCleaner in `spec/support/database_cleaner.rb`:
+
+```ruby
+# spec/support/database_cleaner.rb
+
+RSpec.configure do |config|
+
+  config.use_transactional_fixtures = false
+
+  config.before(:suite) do
+    if config.use_transactional_fixtures?
+      raise(<<-MSG)
+        Delete line `config.use_transactional_fixtures = true` from rails_helper.rb
+        (or set it to false) to prevent uncommitted transactions being used in
+        JavaScript-dependent specs.
+
+        During testing, the app-under-test that the browser driver connects to
+        uses a different database connection to the database connection used by
+        the spec. The app's database connection would not be able to access
+        uncommitted transaction data setup over the spec's database connection.
+      MSG
+    end
+    DatabaseCleaner.clean_with(:truncation)
+  end  
+
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
+  end
+
+  config.before(:each, type: :feature) do
+    # :rack_test driver's Rack app under test shares database connection
+    # with the specs, so continue to use transaction strategy for speed.
+    driver_shares_db_connection_with_specs = Capybara.current_driver == :rack_test
+
+    if !driver_shares_db_connection_with_specs
+      # Driver is probably for an external browser with an app
+      # under test that does *not* share a database connection with the
+      # specs, so use truncation strategy.
+      DatabaseCleaner.strategy = :truncation
+    end
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.append_after(:each) do
+    DatabaseCleaner.clean
+  end
+
+end
+```
+
+
+
+API setup
 
 
 ```ruby
@@ -150,7 +274,7 @@ Make (folder and) file
 *app/controllers/api/songs_controller.rb*
 
 ```ruby
-# app/controllers/api/songss_controller.rb
+# app/controllers/api/songs_controller.rb
 
 class Api::SongsController < ApplicationController
   def index
@@ -163,13 +287,13 @@ end
 
 
 
-*In browser*, http://localhost:3000/api/rooms.json, returns JSON-formatted data
+*In browser*, http://localhost:3000/api/songs.json, returns JSON-formatted data
 
 *In shell*
 
 ```shell
-$ curl http://localhost:3000/api/rooms/json
-$ curl http://localhost:3000/api/rooms/json | json_pp
+$ curl http://localhost:3000/api/songs/json
+$ curl http://localhost:3000/api/songs/json | json_pp
 ```
 
 
@@ -283,7 +407,7 @@ $ rails generate serializer song
 
 created 
 
-*app/serializers/SongSerializer*
+*app/serializers/song_serializer.rb*
 
 ```ruby
 # app/serializers/song_serializer.rb
