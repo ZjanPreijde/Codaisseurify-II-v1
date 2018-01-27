@@ -2,6 +2,7 @@
           <!-- Render body_header -->
           <%= render "shared/body_header" %>
 
+          <!-- artists/show.html.erb -->
           <div class="panel-heading">
             <div class="text-center">
               <h1>(#<%= @artist.id %>) <%= @artist.name %></h1>
@@ -32,18 +33,12 @@
               </tr>
               <% @artist.songs.each do |song| %>
                 <tr>
-                  <td id="song-<%= song.id %>">
-                    <%= song.title %>
-                  </td>
-                  <td>
-                    #<%= song.artist_id %>-<%= song.id %>
-                  </td>
+                  <td id="song-<%= song.id %>" class="song"><%= song.title %></td>
+                  <td>#<%= song.artist_id %>-<%= song.id %></td>
                   <td class="text-center">
                     <a href="#"
                       id="song-delete-<%= song.id %>"
-                       class="btn btn-warning">
-                       Delete
-                    </a>
+                      class="song-delete btn btn-warning">Delete</a>
                     <!-- < %= link_to "Delete",
                       artist_song_path(song.artist.id, song.id),
                       method: :delete,
