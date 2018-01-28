@@ -71,7 +71,7 @@ function deleteSong(artistId, songId, confirmDelete = true) {
     deleteFlag = confirm("Do you want to delete this song?");
   }
   if (deleteFlag ) {
-    if (deleteApiCall(artistId, songId)) { ;
+    if (deleteSongApiCall(artistId, songId)) { ;
       removeSongFromTable(songId) ;
     }
   }
@@ -107,16 +107,44 @@ function addSong(title) {
 };
 
 
+// !! CHECK TODOS.JS for AJAX requests !!
 // API call delete (DELETE)
-function deleteApiCall() {
+// API call resulting in succes will not give us much?
+// curl -i -H "Accept: application/json"
+//  -H "Content-type: application/json"
+//  -X DELETE
+//  http://localhost:3000/api/songs/1
+// => {"message":"Song successfully deleted"}
+function deleteSongApiCall( artistId, songId ) {
   let deleteSucceed = true ;
-  // API call resulting in succes will not give us much?
+  let apiCall = '-i '+
+    ' -H "Accept: application/json"' +
+    ' -H "Content-type: application/json"' +
+    ' -X DELETE' +
+    ' http://localhost:3000/api/songs/' + songId;
+
   return deleteSucceed ;
 }
 
-// API call add (POST)
+// !! CHECK TODOS.JS for AJAX requests !!
+// API call add (POST), check for string delimiters ( '  "  )
+// What happens if we put quotes in values?
+// curl -i -H "Accept: application/json"
+//  -H "Content-type: application/json"
+//  -d '{"title":"New song"}'
+//  -X POST
+//  http://localhost:3000/api/songs
+// => ?? Does not work :-(
 function addSongApiCall( artistId, title ) {
-  let songId = ""
+  let songId = "";
+  // Build data string, 1 field is not very complicated :-)
+  let apiData = "'" + '{"title":"' + title + '"}' + "'";
+  let apiCall = '-i' +
+    ' -H "Accept: application/json"' +
+    ' -H "Content-type: application/json"' +
+    ' -d ' +  apiData +
+    ' -X POST' +
+    ' http://localhost:3000/api/songs';
 
   // API call resulting in succes will give songId
   songId = Math.floor(Math.random() * 100).toString() ;

@@ -405,9 +405,9 @@ $ bundle install
 $ rails generate serializer song
 ```
 
-created 
+creates :
 
-*app/serializers/song_serializer.rb*
+*app/serializers/song_serializer.rb*, why only *:title*?
 
 ```ruby
 # app/serializers/song_serializer.rb
@@ -417,7 +417,11 @@ class SongSerializer < ActiveModel::Serializer
 end
 ```
 
-add code not present :
+
+
+Rewrite code serializer style
+
+*app/controllers/api/songs_controller.rb*
 
 ```ruby
 class Api::SongsController < ApplicationController
@@ -474,6 +478,22 @@ class Api::SongsController < ApplicationController
   end
 end
 ```
+
+test, add
+
+```shell
+$ curl -i -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"title":"test song title","artist_id":"1"}' http://localhost:3000/api/songs
+```
+
+does not work : {"errors:{"artist":["must exist"]}}
+
+replacing *"artist_id":"1"* with *"artist":"1"* also does not work
+
+
+
+
+
+
 
 User verification, very interesting, but not in this stage :-) See reader.
 
