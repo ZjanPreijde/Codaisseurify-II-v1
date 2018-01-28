@@ -3,6 +3,7 @@
           <%= render "shared/body_header" %>
 
           <!-- artists/show.html.erb -->
+          <input id="artistId" name="artistId" type="hidden" value="<%= @artist.id %>">
           <div class="panel-heading">
             <div class="text-center">
               <h1>(#<%= @artist.id %>) <%= @artist.name %></h1>
@@ -25,25 +26,21 @@
           </div>
 
           <div class="panel-body">
-            <table class="table">
+            <table id="song-table" class="table">
               <tr>
                 <th>Title</th>
                 <th>#</th>
                 <th class="text-center">Don't like it?</th>
               </tr>
               <% @artist.songs.each do |song| %>
-                <tr>
-                  <td id="song-<%= song.id %>" class="song"><%= song.title %></td>
+                <tr id="song-<%= song.id %>"">
+                  <td class="song"><%= song.title %></td>
                   <td>#<%= song.artist_id %>-<%= song.id %></td>
                   <td class="text-center">
                     <a href="#"
                       id="song-delete-<%= song.id %>"
+                      name="<%= song.artist_id %>"
                       class="song-delete btn btn-warning">Delete</a>
-                    <!-- < %= link_to "Delete",
-                      artist_song_path(song.artist.id, song.id),
-                      method: :delete,
-                      data: { confirm: "Delete song. Are you sure?" },
-                      class: "btn btn-warning" %> -->
                   </td>
                 </tr>
               <% end %>
@@ -66,11 +63,6 @@
                 <td class="text-center">
                   <div class="actions">
                     <a href="#" id="add-song" class="btn btn-success btn-md">Add</a>
-                    <!-- < %= f.submit "Add",
-                        class: "btn btn-success btn-md" %> -->
-                    <!-- <div class="actions">
-                       <input type="submit" name="commit" value="Add" class="btn btn-success btn-md" data-disable-with="Add" />
-                     </div> -->
                 </div>
                 </td>
               </tr>
