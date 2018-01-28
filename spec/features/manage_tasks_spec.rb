@@ -31,4 +31,20 @@ feature 'Manage tasks', js: true do
     expect( page ).to have_no_content('Manage task, song 1')
   end
 
+  scenario 'delete all songs' do
+    visit artist_path(1)
+
+    accept_confirm do
+      page.click_on('Delete all songs')
+    end
+    # alternative : dismiss_confirm do
+
+    sleep(2) # Yes, yes, I should not use this
+
+    expect( page ).to have_no_content('Manage task, song 1')
+    expect( page ).to have_no_content('Manage task, song 2')
+
+    sleep(2) # Yes, yes, I should not use this
+  end
+
 end
