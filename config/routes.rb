@@ -7,9 +7,13 @@ Rails.application.routes.draw do
 
   get '/bootstrap', to: 'pages#bootstrap', as: 'bootstrap'
 
-  # resources :artists do
-  # end
+end
 
-  # Does not do anything extra?
-  # get 'pages/home'
+# API setup
+Rails.application.routes.draw do
+  # rest of the code...
+
+  namespace :api do
+    resources :songs
+  end
 end
