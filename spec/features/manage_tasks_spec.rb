@@ -4,8 +4,8 @@ require 'rails_helper'
 feature 'Manage tasks', js: true do
   before :each do
     Artist.create(name: 'Manage Task Artist')
-    Artist.first.songs.create(title: 'Manage task, song 1')
-    Artist.first.songs.create(title: 'Manage task, song 2')
+    Artist.first.songs.create(title: 'Manage Task, song 1')
+    Artist.first.songs.create(title: 'Manage Task, song 2')
   end
 
   scenario 'add a new song' do
@@ -26,8 +26,6 @@ feature 'Manage tasks', js: true do
     end
     # alternative : dismiss_confirm do
 
-    sleep(2) # Yes, yes, I should not use this
-
     expect( page ).to have_no_content('Manage task, song 1')
   end
 
@@ -39,12 +37,8 @@ feature 'Manage tasks', js: true do
     end
     # alternative : dismiss_confirm do
 
-    sleep(2) # Yes, yes, I should not use this
-
     expect( page ).to have_no_content('Manage task, song 1')
     expect( page ).to have_no_content('Manage task, song 2')
-
-    sleep(2) # Yes, yes, I should not use this
   end
 
 end
